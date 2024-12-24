@@ -171,6 +171,31 @@ Project-(Mortgage-Calculator)/
 - Proper symbol formatting
 - Automatic value updates on currency change
 
+### Loan Payoff Calculation
+- **Simple Formula Approach**
+  - Base payoff time = Loan Amount / Principal Payment
+  - With extra payments = Loan Amount / (Principal + Extra Payment)
+  - Provides clear, straightforward estimation of loan term
+
+### Time Saved Calculation
+- **Comparative Analysis**
+  - Calculates base payoff time without extra payments
+  - Computes accelerated payoff time with extra payments
+  - Time saved = Base payoff time - Accelerated payoff time
+  - Shows exact years and months saved
+
+### Example Calculations
+1. **Without Extra Payments**
+   - Loan Amount: 1,200,000
+   - Principal Payment: 10,000/month
+   - Payoff Time = 1,200,000/10,000 = 120 months (10 years)
+
+2. **With Extra Payments**
+   - Extra Payment: 2,000/month
+   - Total Monthly Payment: 12,000
+   - New Payoff Time = 1,200,000/12,000 = 100 months (8 years, 4 months)
+   - Time Saved = 20 months (1 year, 8 months)
+
 ## Contributing
 
 Feel free to contribute to this project:

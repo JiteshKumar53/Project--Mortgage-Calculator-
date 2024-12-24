@@ -343,19 +343,25 @@ class MortgageCalculator:
             # Calculate total interest over loan term
             total_interest = (base_monthly * 360) - loan_amount
 
+            # Calculate base payoff time (without extra payments)
+            base_months_to_payoff = int(loan_amount / principal_payment)
+            
             # Calculate time and interest saved with extra payments
             if extra_payment > 0:
-                months_with_extra = 0
-                remaining_balance = loan_amount
-                total_interest_with_extra = 0
+                # Calculate months to payoff with the simplified formula
+                total_monthly_payment = principal_payment + extra_payment
+                months_with_extra = int(loan_amount / total_monthly_payment)
                 
-                while remaining_balance > 0 and months_with_extra < 360:
-                    months_with_extra += 1
+                # Calculate interest for the shorter period
+                total_interest_with_extra = 0
+                remaining_balance = loan_amount
+                for _ in range(months_with_extra):
                     interest = remaining_balance * monthly_rate
                     total_interest_with_extra += interest
-                    remaining_balance -= (principal_payment + extra_payment)
+                    remaining_balance -= total_monthly_payment
                 
-                time_saved = 360 - months_with_extra
+                # Calculate time saved by comparing with base payoff time
+                time_saved = base_months_to_payoff - months_with_extra
                 years_saved = time_saved // 12
                 months_saved = time_saved % 12
                 
@@ -366,10 +372,12 @@ class MortgageCalculator:
                 years_to_payoff = months_with_extra // 12
                 months_to_payoff = months_with_extra % 12
             else:
+                # Use base payoff time when no extra payments
+                months_with_extra = base_months_to_payoff
+                years_to_payoff = months_with_extra // 12
+                months_to_payoff = months_with_extra % 12
                 years_saved = months_saved = 0
                 interest_saved = 0
-                years_to_payoff = 30
-                months_to_payoff = 0
 
             # Format currency based on selection
             currency = self.currency_var.get()
