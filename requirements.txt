@@ -1,0 +1,15 @@
+# GUI Dependencies
+ttkbootstrap==1.10.1
+tk==0.1.0
+
+# PDF Generation
+reportlab==4.0.7
+pillow==10.1.0
+
+# Python Version Requirement
+# Python >= 3.8
+
+# Optional Dependencies for Development
+# pytest==7.4.3          # For testing
+# black==23.11.0         # For code formatting
+# pylint==3.0.2          # For code analysis
